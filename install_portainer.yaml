@@ -1,0 +1,24 @@
+- name: Install jsondiff for ansible docker_stack
+  apt:
+    pkg:
+      - python3-jsondiff
+    state: latest
+    update_cache: true
+
+- name: Create portainer directory
+  ansible.builtin.file:
+    path: /portainer
+    state: directory
+
+- name: Copy portainer compose file
+  ansible.builtin.copy:
+    src: /root/ansible/portainer-compose.yml
+    dest: /portainer/docker-compose.yml
+    # owner: foo
+    # group: foo
+    # mode: '0644'
+
+- name: Deploy portainer from a compose file
+  community.docker.docker_compose_v2:
+    state: present
+    project_src: /portainer
