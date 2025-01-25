@@ -1,0 +1,8 @@
+- hosts: docker
+  become: true
+  tasks:
+    - name: Install docker
+      import_tasks: roles/common/tasks/install_docker.yaml
+
+    - name: Install portainer via docker
+      import_tasks: roles/common/tasks/install_portainer.yaml
