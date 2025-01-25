@@ -1,3 +1,4 @@
+---
 - name: Install jsondiff for ansible docker_stack
   apt:
     pkg:

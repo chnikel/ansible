@@ -1,11 +1,12 @@
+---
 - name: Install aptitude
-  apt:
+  ansible.builtin.apt:
     name: aptitude
-    state: latest
+    state: latest # noqa package-latest
     update_cache: true
 
 - name: Install required system packages
-  apt:
+  ansible.builtin.apt:
     pkg:
       - apt-transport-https
       - ca-certificates
@@ -15,39 +16,39 @@
       - python3-pip
       - virtualenv
       - python3-setuptools
-    state: latest
+    state: latest # noqa package-latest
     update_cache: true
 
 - name: Add Docker GPG apt Key
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
 
 - name: Add Docker Repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb https://download.docker.com/linux/ubuntu focal stable
     state: present
 
 - name: Update apt and install docker-ce
-  apt:
+  ansible.builtin.apt:
     name: docker-ce
-    state: latest
+    state: latest # noqa package-latest
     update_cache: true
 
 - name: Run and enable docker
-  service:
+  ansible.builtin.service:
     name: docker
     state: started
     enabled: true
 
 - name: Install docker compose v2
-  apt:
+  ansible.builtin.apt:
     name: docker-compose-plugin
     state: present
     cache_valid_time: 86400
 
 - name: Adding existing user 'amin' to group docker
-  user:
+  ansible.builtin.user:
     name: "amin"
     groups: docker
-    append: yes
+    append: true
