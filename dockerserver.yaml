@@ -3,6 +3,13 @@
   hosts: docker
   become: true
   tasks:
+    - name: Install vim
+      ansible.builtin.apt:
+        pkg:
+          - vim
+        state: latest # noqa package-latest
+        update_cache: true
+
     - name: Install docker
       ansible.builtin.import_tasks: roles/common/tasks/install_docker.yaml
 
