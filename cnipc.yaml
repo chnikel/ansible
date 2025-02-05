@@ -1,0 +1,33 @@
+---
+- 
+  name: "Play for my personal pc"
+  hosts: cni
+  become: true
+  tasks:
+    # - name: Install Vscode
+    #   community.general.snap:
+    #     name: code
+    #     classic: true
+    #     state: present
+    #   when: ansible_distribution == 'Ubuntu'
+
+    # - name: Add papirus repository
+    #   ansible.builtin.apt_repository:
+    #     repo: ppa:papirus/papirus
+    #     state: present
+
+    # - name: Install "papirus-icon-theme"
+    #   ansible.builtin.apt:
+    #     pkg:
+    #       - papirus-icon-theme
+    #     state: latest # noqa package-latest
+    #     update_cache: true
+
+    # - name: Enable the "papirus" icon theme
+    #   community.general.dconf:
+    #     key: "/org/gnome/desktop/interface/icon-theme"
+    #     value: "'Papirus-Dark'"
+    #     state: present
+
+    - name: Install "i3 window manager"
+      ansible.builtin.import_tasks: roles/common/tasks/install_i3.yaml

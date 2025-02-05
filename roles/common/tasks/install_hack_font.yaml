@@ -1,0 +1,30 @@
+---
+- name: Ensure fonts directory
+  ansible.builtin.file:
+    path: "/home/chnikel/.fonts"
+    state: directory
+
+- name: Hack exists
+  ansible.builtin.shell: "ls /home/chnikel/.fonts/Hack*Nerd*Font*Complete*"
+  register: hack_exists
+  ignore_errors: true
+
+- name: Download Hack
+  when: hack_exists is failed
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.zip
+    dest: "/home/chnikel/.fonts/"
+    remote_src: true
+
+- name: Iosevka exists
+  ansible.builtin.shell: "ls /home/chnikel/.fonts/Iosevka*"
+  register: iosevka_exists
+  ignore_errors: true
+
+- name: Download Iosevka
+  when: iosevka_exists is failed
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Iosevka.zip
+    dest: "/home/chnikel/.fonts/"
+    remote_src: true
+    

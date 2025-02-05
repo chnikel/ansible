@@ -1,4 +1,8 @@
 192.168.178.105 ansible_ssh_user=amin
+192.168.178.134 ansible_ssh_user=chnikel
 
 [docker]
 192.168.178.105
+
+[cni]
+192.168.178.134

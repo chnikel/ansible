@@ -1,0 +1,20 @@
+---
+- name: Install "i3 window manager" packages
+  ansible.builtin.apt:
+    pkg:
+      - i3
+      - rofi
+      - polybar
+    state: latest # noqa package-latest
+    update_cache: true
+
+- name: Copy i3 folder
+  ansible.builtin.copy:
+    src: /root/ansible/roles/common/files/i3
+    dest: /home/chnikel/.config
+    owner: chnikel
+    group: chnikel
+    mode: '0644'
+
+- name: Ensure fonts directory
+  ansible.builtin.import_tasks: install_hack_font.yaml
